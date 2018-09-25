@@ -53,7 +53,7 @@ end
 %
 if thinpb
         % perform nms operation
-        E=edge_nms(pb, 0);
+        pb=edge_nms(pb, 0);
         if opt.debug; imshow(1-pb); pause; end 
 end
 
@@ -138,7 +138,7 @@ if (opt.fastmode)
 else
     for t = 1:nthresh, 
         bmap = double(pb >= max(eps,thresh(t)));  
-        Z=zeros(size(E)); matchE=Z; matchG=Z; allG=Z;
+        Z=zeros(size(pb)); matchE=Z; matchG=Z; allG=Z;
         if opt.w_occ;  matchO = Z; matchGO=Z; end 
         n = size(gt,3);
         for i = 1:n,
