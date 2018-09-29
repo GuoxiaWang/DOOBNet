@@ -1,4 +1,4 @@
-# DOOBNet: Deep Object Occlusion Boundary Detection from an Image ([arXiv](https://arxiv.org/abs/1806.03772))
+# DOOBNet: Deep Object Occlusion Boundary Detection from an Image ([arXiv](https://arxiv.org/abs/1806.03772)) accepted by ACCV2018[Oral]
 
 Created by Guoxia Wang.
 
