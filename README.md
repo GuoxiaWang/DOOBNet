@@ -4,7 +4,7 @@ Created by Guoxia Wang.
 
 ### Introduction
 
-Object occlusion boundary detection is a fundamental and crucial research problem in computer vision. This is challenging to solve as encountering the extreme boundary/non-boundary class imbalance during training an object occlusion boundary detector. In this paper, we propose to address this class imbalance by up-weighting the loss contribution of false negative and false positive examples with our novel Attention Loss function. We also propose a unified end-to-end multi-task deep object occlusion boundary detection network (DOOBNet) by sharing convolutional features to simultaneously predict object boundary and occlusion orientation. DOOBNet adopts an encoder-decoder structure with skip connection in order to automatically learn multi-scale and multi-level features. We significantly surpass the state-of-the-art on the PIOD dataset (ODS F-score of .668) and the BSDS ownership dataset (ODS F-score of .555), as well as improving the detecting speed to as 0.037s per image.
+Object occlusion boundary detection is a fundamental and crucial research problem in computer vision. This is challenging to solve as encountering the extreme boundary/non-boundary class imbalance during training an object occlusion boundary detector. In this paper, we propose to address this class imbalance by up-weighting the loss contribution of false negative and false positive examples with our novel Attention Loss function. We also propose a unified end-to-end multi-task deep object occlusion boundary detection network (DOOBNet) by sharing convolutional features to simultaneously predict object boundary and occlusion orientation. DOOBNet adopts an encoder-decoder structure with skip connection in order to automatically learn multi-scale and multi-level features. We significantly surpass the state-of-the-art on the PIOD dataset (ODS F-score of .702) and the BSDS ownership dataset (ODS F-score of .555), as well as improving the detecting speed to as 0.037s per image on the PIOD dataset.
 
 ### Citation
 
@@ -18,13 +18,20 @@ If you find DOOBNet useful in your research, please consider citing:
 }
 ```
 
-## Training
-
-Source code will be released coming soon.
-
-### Data Preparation
+## Demo
 
 Here, we assume that you locate in the DOOBNet root directory `$DOOBNET_ROOT`.
+
+If you want to run our DOOBNet quickly, you need to download our trained model from [DOOBNet PIOD](https://drive.google.com/open?id=1suGHfi1_Leky1nwqCqbSdNRrOfqF6XNF) and save the `doobnet_piod.caffemodel` to `$DOOBNET_ROOT/examples/doobnet/Models/`. Then move to the folder and run the python demo script.
+
+```
+cd $DOOBNET_ROOT/examples/doobnet
+python doobnet_demo.py
+```
+
+
+## Data Preparation
+
 
 #### PASCAL Instance Occlusion Dataset (PIOD)
 
@@ -46,11 +53,11 @@ Now, you can use data convert tool to augment and generate HDF5 format data for 
 ```
 mkdir data/PIOD/Augmentation
 
-python tools/doobnet_mat2hdf5_edge_ori.py \
+python doobscripts/doobnet_mat2hdf5_edge_ori.py \
 --dataset PIOD \
 --label-dir data/PIOD/Data \
 --img-dir data/PIOD/JPEGImages \
---piod-val-list-file data/PIOD/val_doc_2010.txt \ 
+--piod-val-list-file data/PIOD/val_doc_2010.txt \
 --output-dir data/PIOD/Augmentation
 ```
 
@@ -82,13 +89,33 @@ Run the following code for BSDS ownership dataset.
 ```
 mkdir data/BSDSownership/Augmentation
 
-python tools/doobnet_mat2hdf5_edge_ori.py \
+python doobscripts/doobnet_mat2hdf5_edge_ori.py \
 --dataset BSDSownership \
 --label-dir data/BSDSownership/trainfg \
 --img-dir data/BSDSownership/BSDS300/images/train \
 --bsdsownership-testfg data/BSDSownership/testfg \
 --output-dir data/BSDSownership/Augmentation 
 ```
+
+## Training
+
+Firstly, you need to download the Res50 weight file from [Res50](https://drive.google.com/open?id=1nyGjqSj0LGVsY9iBhsEdo-TXSyROGTgZ) and save `resnet50.caffemodel` to the folder `$DOOBNET_ROOT/models/resnet/`.
+
+#### PASCAL Instance Occlusion Dataset (PIOD)
+
+For training DOOBNet on PIOD training dataset, you can run:
+
+```
+cd $DOOBNET_ROOT/examples/doobnet/PIOD
+
+./train.sh
+```
+When training completed, you need to modify `model = '../Models/doobnet_piod.caffemodel'` in `deploy_doobnet_piod.py` and then run `python deploy_doobnet_piod.py` to get the results on PIOD testing dataset. For comparation, you can also download our trained model from [DOOBNet PIOD](https://drive.google.com/open?id=1suGHfi1_Leky1nwqCqbSdNRrOfqF6XNF).
+
+
+#### BSDS ownership
+For training DOOBNet on BSDS ownership, you can refer the manner as same as PIOD dataset above. You can download trained DOOBNet on BSDS ownership from here [DOOBNet BSDSownership](https://drive.google.com/open?id=1TMocxt9iE9w6qVLo4iFVwHoQm9nbsX9K).
+
 
 ## Evaluation
 
@@ -104,5 +131,5 @@ run doobscripts/evaluation/EvaluateOcc.m
 #### Option
 For visualization, to run the script:
 ```
-run doobscripts/visualization/PlotAll.m
+run doobscripts/visulation/PlotAll.m
 ```
