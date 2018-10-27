@@ -68,18 +68,19 @@ end
 EvaluateBoundary(ImageList, opt);
 
 if opt.vis
+    close all;
     if strfind(opt.append, '_occ'); 
-        close all;
         app_name = opt.append; 
         opt.eval_item_name = 'Boundary';
         opt.append = [app_name, '_e'];  plot_multi_eval_v2(opt.outDir, opt, opt.method); title('Edge'); 
-        % if opt.print,        set(gcf, 'PaperPositionMode', 'auto');        print(['-f' num2str(1)], '-dpng', [evalPath, model_name '.png']);    end
-        
         opt.eval_item_name = 'Orientation PR';
         opt.append = [app_name, '_poc'];  plot_multi_eval_v2(opt.outDir, opt, opt.method);  title('PRO'); 
         
         opt.append = [app_name, '_aoc'];
         plot_multi_occ_acc_eval(opt.outDir, opt, opt.method);
+    else
+        opt.eval_item_name = 'Boundary';
+        plot_multi_eval_v2(opt.outDir, opt, opt.method); title('Edge'); 
     end
 end
 toc;

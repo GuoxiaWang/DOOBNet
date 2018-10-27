@@ -44,7 +44,7 @@ if pb_num >= 2 && opt.w_occ
     pb = pb(:,:,1); 
 end
 
-if size(gt,3) >= 2 && opt.w_occ
+if size(gt,3) >= 2 || opt.w_occ
     % first is gt edge, second is gt occ 
     gt_occ = gt(:,:,2:2:end); 
     gt = gt(:,:,1:2:end); 
