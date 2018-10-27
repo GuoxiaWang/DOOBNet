@@ -36,9 +36,14 @@ if ~exist(fname, 'file')  | opt.overwrite
         resfile = fullfile(resPath, [imglist{ires}, '.mat']);
         edge_maps = load(resfile);
         edge_maps = edge_maps.edge_ori;
-        res_img = zeros([size(edge_maps.edge), 2], 'single');
-        res_img(:,:,1) = edge_maps.edge;
-        res_img(:,:,2) = edge_maps.ori;
+        if opt.w_occ
+            res_img = zeros([size(edge_maps.edge), 2], 'single');
+            res_img(:,:,1) = edge_maps.edge;
+            res_img(:,:,2) = edge_maps.ori;
+        else
+            res_img = zeros([size(edge_maps.edge), 1], 'single');
+            res_img(:,:,1) = edge_maps.edge;
+        end
         
         if size(edge_maps,2) >= 3 && opt.w_occ
             opt.rank_score = res_img(:,:,1) + edge_maps{scale_id,3};
