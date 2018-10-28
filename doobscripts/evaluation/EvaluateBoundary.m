@@ -92,6 +92,8 @@ end
 if strfind(append, '_occ'); 
     % opt.overwrite = 1;
     collect_eval_bdry_occ(opt.outDir, append, opt.overwrite);
+else
+    collect_eval_bdry_v2(opt.outDir, append);
 end
 
 %% clean up
