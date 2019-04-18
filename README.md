@@ -12,7 +12,7 @@ If you find DOOBNet useful in your research, please consider citing:
 ```
 @article{wang2018doobnet,
   Title = {DOOBNet: Deep Object Occlusion Boundary Detection from an Image},
-  Author = {Guoxia Wang and Xiaohui Liang and Frederick W. B. Li},
+  Author = {Guoxia Wang and XiaoChuan Wang and Frederick W. B. Li and Xiaohui Liang},
   Journal = {arXiv preprint arXiv:1806.03772},
   Year = {2018}
 }
