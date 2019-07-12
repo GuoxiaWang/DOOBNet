@@ -133,3 +133,6 @@ For visualization, to run the script:
 ```
 run doobscripts/visulation/PlotAll.m
 ```
+
+## Third-party re-implementations
+1. Tensorflow, Attention Loss: [code](https://github.com/xjock/deeplebv3plus-hedplus). Thanks for Guo Rui's contribution!
