@@ -340,17 +340,17 @@ def main():
             else:
                 gt_path = os.path.join(os.path.abspath(dst_label_dir), h5_filename)
                 train_val_pair_list.append((img_path, gt_path))
-        with open(os.path.join(args.output_dir, 'train_pari_320x320.lst'), 'w') as f:
+        with open(os.path.join(args.output_dir, 'train_pair_320x320.lst'), 'w') as f:
             for img_path, gt_path in train_val_pair_list:
                 f.write('{} {}\n'.format(img_path,  gt_path))
-        print('Write train list to {}.'.format(os.path.join(args.output_dir, 'train_pari_320x320.lst')))
+        print('Write train list to {}.'.format(os.path.join(args.output_dir, 'train_pair_320x320.lst')))
 
         with open(os.path.join(args.output_dir, 'test.lst'), 'w') as f:
             for img_path in test_list:
                 f.write('{}\n'.format(img_path))
         print('Write test list to {}.'.format(os.path.join(args.output_dir, 'test.lst')))
 
-    print 'Down!'
+    print('Down!')
 
 
 if __name__ == '__main__':
